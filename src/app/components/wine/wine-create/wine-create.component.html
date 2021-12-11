@@ -2,42 +2,42 @@
     <mat-card-title>Novo Vinho</mat-card-title>
     <form>
         <mat-form-field>
-            <input matInput placeholder="Titulo *" [(ngModel)]="wine.title" name="title">
+            <input matInput placeholder="Nome *" [(ngModel)]="wine.name" name="name">
         </mat-form-field>
-        <mat-form-field>
-            <mat-label>Resumo *</mat-label>
-            <textarea matInput [(ngModel)]="wine.summary" name="summary"></textarea>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Desenvolvedor *" [(ngModel)]="wine.developer" name="developer">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Gênero *</mat-label>
-            <mat-select [(ngModel)]="wine.genre" name="genre">
-                <mat-option *ngFor="let genre of genres" [value]="genre">
-                    {{ genre }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Console *</mat-label>
-            <mat-select [(ngModel)]="wine.type" name="type">
-                <mat-option *ngFor="let type of types" [value]="type">
-                    {{ type }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <!-- Image Upload Field -->
-        <mat-label>Imagem (OBS: apenas imagem menores que 1MB serão aceitas)</mat-label>
-        <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)" name="uploadFile"
-            accept="image/*" />
-        <img [src]="wine.imgPath" height="200" *ngIf="wine.imgPath">
-    </form>
-    <button mat-raised-button (click)="createWine()" color="primary">
-        Salvar
-    </button>
 
-    <button mat-raised-button (click)="cancel()">
-        Cancelar
-    </button>
+        <mat-form-field>
+            <input matInput placeholder="Produto *" [(ngModel)]="wine.producer" name="producer">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="País *" [(ngModel)]="wine.country" name="country">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Tipo de Vinho *" [(ngModel)]="wine.type" name="type">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Tipo de uva *" [(ngModel)]="wine.type_grape" name="type_grape">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Harmonização" [(ngModel)]="wine.harmonizing" name="harmonizing">
+        </mat-form-field>
+
+        <label>Inserir imagem do produto (OBS: apenas imagem menores que 1MB serão aceitas)</label><br>
+        <label for='selecao-arquivo' class="label-input-file">Selecionar uma imagem &#187;</label>
+        <input id='selecao-arquivo' type='file' accept="image/*" (change)="uploadFileEvt($event)"><br>
+        <img *ngIf="imgBase64Path" [src]="imgBase64Path">
+    </form>
+
+    <div align="end">
+        <button mat-raised-button (click)="createWine()" color="primary">
+            Salvar
+        </button>
+
+        <button mat-raised-button (click)="cancel()">
+            Cancelar
+        </button>
+    </div>
 </mat-card>

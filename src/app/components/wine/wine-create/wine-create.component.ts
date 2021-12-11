@@ -21,6 +21,8 @@ export class WineCreateComponent implements OnInit {
         user_id: null,
     }
 
+    imgBase64Path: string
+
     types = ['pc', 'xbox', 'switch', 'playstation']
     genres = ['Ação', 'Aventura', 'Estratégia', 'RPG', 'Esporte', 'Simulação']
 
@@ -45,8 +47,7 @@ export class WineCreateComponent implements OnInit {
                 image.src = e.target.result;
                 image.onload = rs => {
                     console.log('Caiu');
-                    // const imgBase64Path = e.target.result;
-                    // this.wine.image = imgBase64Path
+                    this.imgBase64Path = e.target.result;
                 };
             };
             console.log(imgFile.target);
@@ -56,10 +57,11 @@ export class WineCreateComponent implements OnInit {
 
     createWine() {
         this.wine.user_id = JSON.parse(localStorage.getItem('currentUser')).id
-        this.wineService.create(this.wine).subscribe(() => {
-            this.wineService.showMessage('Vinho cadastrado com sucesso')
-            this.router.navigate(['/wines'])
-        })
+        console.log(this.wine)
+        // this.wineService.create(this.wine).subscribe(() => {
+        //     this.wineService.showMessage('Vinho cadastrado com sucesso')
+        //     this.router.navigate(['/wines'])
+        // })
     }
 
     cancel() {
