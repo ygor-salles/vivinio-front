@@ -4,15 +4,15 @@ import { UserDeleteComponent } from './components/user/user-delete/user-delete.c
 import { UserReadComponent } from './components/user/user-read/user-read.component';
 import { UserCreateComponent } from './components/user/user-create/user-create.component';
 import { UsersCrudComponent } from './views/users-crud/users-crud.component';
-import { GameUpdateComponent } from './components/game/game-update/game-update.component';
-import { ReviewReadComponent } from './components/game/game-review/game-review.component';
-import { GameReadComponent } from './components/game/game-read/game-read.component';
-import { GameCreateComponent } from './components/game/game-create/game-create.component';
+import { WineUpdateComponent } from './components/wine/wine-update/wine-update.component';
+import { ReviewReadComponent } from './components/wine/wine-review/wine-review.component';
+import { WineReadComponent } from './components/wine/wine-read/wine-read.component';
+import { WineCreateComponent } from './components/wine/wine-create/wine-create.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './views/home/home.component';
-import { GamesCrudComponent } from './views/games-crud/games-crud.component';
-import { GameDeleteComponent } from './components/game/game-delete/game-delete.component';
+import { WinesCrudComponent } from './views/wines-crud/wines-crud.component';
+import { WineDeleteComponent } from './components/wine/wine-delete/wine-delete.component';
 import { TopRatedComponent } from "./views/top-rated/top-rated.component";
 import { ConsolesComponent } from "./views/consoles/consoles.component";
 
@@ -23,27 +23,27 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always'
   },
   {
-    path: "games",
-    component: GamesCrudComponent
+    path: "wines",
+    component: WinesCrudComponent
   },
   {
-    path: "games/create",
-    component: GameCreateComponent
+    path: "wines/create",
+    component: WineCreateComponent
   },
   {
-    path: "games/read",
-    component: GameReadComponent
+    path: "wines/read",
+    component: WineReadComponent
   },
   {
-    path: "games/delete/:id",
-    component: GameDeleteComponent
+    path: "wines/delete/:id",
+    component: WineDeleteComponent
   },
   {
-    path: "games/update/:id",
-    component: GameUpdateComponent
+    path: "wines/update/:id",
+    component: WineUpdateComponent
   },
   {
-    path: "games/review/:id",
+    path: "wines/review/:id",
     component: ReviewReadComponent
   },
   {

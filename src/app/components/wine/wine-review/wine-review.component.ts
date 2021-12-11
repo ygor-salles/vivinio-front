@@ -2,34 +2,34 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Review } from 'src/app/models/review.model';
 import { ReviewService } from 'src/app/services/review.service';
-import { GameService } from 'src/app/services/game.service';
+import { WineService } from 'src/app/services/wine.service';
 import { HeaderService } from '../../template/header/header.service';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({
-    selector: 'app-game-review',
-    templateUrl: './game-review.component.html',
-    styleUrls: ['./game-review.component.css']
+    selector: 'app-wine-review',
+    templateUrl: './wine-review.component.html',
+    styleUrls: ['./wine-review.component.css']
 })
 
 export class ReviewReadComponent implements OnInit {
-    gameTitle: string;
+    wineTitle: string;
     reviews: Review[] = [];
     review: Review = {} as Review;
     displayedColumns = ['rate', 'comment', 'action'];
 
     constructor(
         private reviewService: ReviewService,
-        private gameService: GameService,
+        private wineService: WineService,
         private router: Router,
         private route: ActivatedRoute,
         private headerService: HeaderService,
         private appComponent: AppComponent
     ) {
         Object.assign(headerService.headerData, {
-            title: 'Avaliação de Game',
+            title: 'Avaliação de Wine',
             icon: 'grade',
-            routeUrl: '/games'
+            routeUrl: '/wines'
         })
     }
 
@@ -38,11 +38,11 @@ export class ReviewReadComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.review.game_id = this.route.snapshot.paramMap.get('id');
-        this.gameService.readById(this.review.game_id).subscribe(game => {
-            this.gameTitle = game.title
+        this.review.wine_id = this.route.snapshot.paramMap.get('id');
+        this.wineService.readById(this.review.wine_id).subscribe(wine => {
+            this.wineTitle = wine.title
         })
-        this.reviewService.read(this.review.game_id).subscribe(reviews => {
+        this.reviewService.read(this.review.wine_id).subscribe(reviews => {
             this.reviews = reviews
         })
     }
@@ -53,7 +53,7 @@ export class ReviewReadComponent implements OnInit {
         if (this.review.rate >= 0 && this.review.rate <= 10) {
             this.reviewService.create(this.review).subscribe((): void => {
                 this.reviewService.showMessage("Avaliação salva com sucesso!");
-                this.router.navigate([`/games/review/${this.review.game_id}`]);
+                this.router.navigate([`/wines/review/${this.review.wine_id}`]);
                 this.appComponent.redirectFromLoginToCurrent()
             });
         } else {
@@ -64,7 +64,7 @@ export class ReviewReadComponent implements OnInit {
     deleteReview(id: string): void {
         this.reviewService.delete(id).subscribe(() => {
             this.reviewService.showMessage('Avaliação deletada com sucesso!')
-            this.router.navigate([`/games/review/${this.review.game_id}`]);
+            this.router.navigate([`/wines/review/${this.review.wine_id}`]);
             this.appComponent.redirectFromLoginToCurrent()
         })
     }
@@ -82,7 +82,7 @@ export class ReviewReadComponent implements OnInit {
         }
     }
 
-    backToGames(): void {
-        this.router.navigate(["/games"]);
+    backToWines(): void {
+        this.router.navigate(["/wines"]);
     }
 }

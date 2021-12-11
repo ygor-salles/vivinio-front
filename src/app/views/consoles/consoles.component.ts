@@ -11,7 +11,7 @@ export class ConsolesComponent implements OnInit {
   constructor(private headerService: HeaderService) {
     Object.assign(headerService.headerData, {
       title: 'Escolha do console',
-      icon: 'videogame_asset',
+      icon: 'videowine_asset',
       routeUrl: '/consoles'
     })
   }

@@ -34,14 +34,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { HeaderComponent } from './components/template/header/header.component';
 import { NavComponent } from './components/template/nav/nav.component';
 import { HomeComponent } from './views/home/home.component';
-import { GamesCrudComponent } from './views/games-crud/games-crud.component';
-import { GameCreateComponent } from './components/game/game-create/game-create.component';
+import { WinesCrudComponent } from './views/wines-crud/wines-crud.component';
+import { WineCreateComponent } from './components/wine/wine-create/wine-create.component';
 import { LOCALE_ID } from '@angular/core';
-import { GameReadComponent } from './components/game/game-read/game-read.component';
-import { GameDeleteComponent } from './components/game/game-delete/game-delete.component';
+import { WineReadComponent } from './components/wine/wine-read/wine-read.component';
+import { WineDeleteComponent } from './components/wine/wine-delete/wine-delete.component';
 import { DialogComponent } from './services/dialog/dialog.component';
-import { GameUpdateComponent } from './components/game/game-update/game-update.component';
-import { ReviewReadComponent } from './components/game/game-review/game-review.component';
+import { WineUpdateComponent } from './components/wine/wine-update/wine-update.component';
+import { ReviewReadComponent } from './components/wine/wine-review/wine-review.component';
 import { UsersCrudComponent } from './views/users-crud/users-crud.component';
 import { UserCreateComponent } from './components/user/user-create/user-create.component';
 import { UserReadComponent } from './components/user/user-read/user-read.component';
@@ -62,12 +62,12 @@ registerLocaleData(localePt);
     HeaderComponent,
     NavComponent,
     HomeComponent,
-    GamesCrudComponent,
-    GameCreateComponent,
-    GameReadComponent,
-    GameDeleteComponent,
+    WinesCrudComponent,
+    WineCreateComponent,
+    WineReadComponent,
+    WineDeleteComponent,
     DialogComponent,
-    GameUpdateComponent,
+    WineUpdateComponent,
     ReviewReadComponent,
     UsersCrudComponent,
     UserCreateComponent,

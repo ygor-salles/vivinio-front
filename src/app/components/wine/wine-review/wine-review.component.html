@@ -1,7 +1,7 @@
-<mat-card class="details-game">
-    <mat-card-title class="card-with-button">Você está visualizando o jogo "{{gameTitle}}"</mat-card-title>
-    <button class="button-in-title" mat-raised-button (click)="backToGames()" color="basic">
-        Ver lista de jogos
+<mat-card class="details-wine">
+    <mat-card-title class="card-with-button">Você está visualizando o vinho "{{wineTitle}}"</mat-card-title>
+    <button class="button-in-title" mat-raised-button (click)="backToWines()" color="basic">
+        Ver lista de vinhos
     </button>
 </mat-card>
 
@@ -23,12 +23,12 @@
                 <td mat-cell *matCellDef="let row">{{row.comment}}</td>{{user_id}}
             </ng-container>
 
-             <!-- Action Column -->
+            <!-- Action Column -->
             <ng-container *ngIf="user_id!=null" matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef>Ações</th>
                 <td mat-cell *matCellDef="let row">
                     <div *ngIf="user_id==row.user_id">
-                        <a (click)="deleteReview(row._id)" class="delete">
+                        <a (click)="deleteReview(row.id)" class="delete">
                             <i class="material-icons">
                                 delete
                             </i>
@@ -45,7 +45,7 @@
 
 <div *ngIf="reviews.length == 0">
     <mat-card>
-            Ainda não há reviews cadastrados para esse jogo! Para contribuir você precisa estar logado
+        Ainda não há reviews cadastrados para esse vinho! Para contribuir você precisa estar logado
     </mat-card>
 </div>
 
@@ -68,7 +68,7 @@
     <button mat-raised-button (click)="insertReview()" color="accent">
         Enviar
     </button>
-    <button mat-raised-button (click)="backToGames()">
-        Ver lista de jogos
+    <button mat-raised-button (click)="backToWines()">
+        Ver lista de vinhos
     </button>
 </mat-card>

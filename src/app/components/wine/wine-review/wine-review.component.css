@@ -1,12 +1,12 @@
-.details-game {
+.details-wine {
     display: flex;
 }
 
-.details-game mat-card-header {
+.details-wine mat-card-header {
     width: 30%;
 }
 
-.details-game mat-card-content {
+.details-wine mat-card-content {
     width: 70%;
 }
 

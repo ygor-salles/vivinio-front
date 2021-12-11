@@ -1,112 +1,109 @@
-<div class="header-button">    
-    <button mat-raised-button color="primary">
-        <a routerLink="/consoles">Escolher outro console</a>
-    </button>
+<div class="header-button">
+	<button mat-raised-button color="primary">
+		<a routerLink="/consoles">Escolher outro console</a>
+	</button>
 
-    <button mat-raised-button color="primary">
-        <a routerLink="/games">Ver mais jogos</a>
-    </button>    
+	<button mat-raised-button color="primary">
+		<a routerLink="/wines">Ver mais vinhos</a>
+	</button>
 </div>
 
 <div class="container-wrapper">
-	<div *ngIf="!firstGame && !secondGame && !thirdGame">
-		Desculpe, não temos jogos para essa plataforma :(
+	<div *ngIf="!firstWine && !secondWine && !thirdWine">
+		Desculpe, não temos vinhos para essa plataforma :(
 	</div>
 
-	<div *ngIf="firstGame" class="card-wrapper">
+	<div *ngIf="firstWine" class="card-wrapper">
 		<div class="card">
-			<div routerLink="/games/review/{{firstGame?._id}}">
-				<img src="{{ 	firstGame?.imgPath 		? firstGame.imgPath 		: 'http://radioingamar.com.br/portal/img/not-found.png' }}" alt="Avatar" style="width: 100%"/>
+			<div routerLink="/wines/review/{{firstWine?.id}}">
+				<img src="{{ 	firstWine?.imgPath 		? firstWine.imgPath 		: 'http://radioingamar.com.br/portal/img/not-found.png' }}"
+					alt="Avatar" style="width: 100%" />
 			</div>
 			<div class="container">
-				<div routerLink="/games/review/{{firstGame?._id}}">
+				<div routerLink="/wines/review/{{firstWine?.id}}">
 					<h4>
-						<b style="padding-left: .4em;">{{ firstGame?.title }}</b>
+						<b style="padding-left: .4em;">{{ firstWine?.title }}</b>
 					</h4>
 				</div>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Gênero: {{ firstGame?.genre }}</b><br>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Nota: {{ firstGame?.rating }} </b><br>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Desenvolvedor: {{ firstGame?.developer }} </b><br>
-				<p style="padding-left: .4em;"><b>Descrição: </b>{{ firstGame?.summary }}</p>
+				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Gênero: {{ firstWine?.genre }}</b><br>
+				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Nota: {{ firstWine?.rating }} </b><br>
+				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Desenvolvedor: {{ firstWine?.developer
+					}} </b><br>
+				<p style="padding-left: .4em;"><b>Descrição: </b>{{ firstWine?.summary }}</p>
 			</div>
 		</div>
 		<div class="star-container">
-			<img class="star-img" src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png" alt=""/>
-			<img class="star-img" src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png" alt=""/>
-			<img class="star-img" src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png" alt=""/>
+			<img class="star-img"
+				src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png"
+				alt="" />
+			<img class="star-img"
+				src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png"
+				alt="" />
+			<img class="star-img"
+				src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png"
+				alt="" />
 		</div>
 		<p class="rated">1° Mais bem votado</p>
 	</div>
-	<div *ngIf="secondGame" class="card-wrapper">
+	<div *ngIf="secondWine" class="card-wrapper">
 		<div class="card">
-			<div  routerLink="/games/review/{{secondGame?._id}}">
-				<img
-					src="{{
-						secondGame && secondGame.imgPath
-							? secondGame.imgPath
+			<div routerLink="/wines/review/{{secondWine?.id}}">
+				<img src="{{
+						secondWine && secondWine.imgPath
+							? secondWine.imgPath
 							: 'http://radioingamar.com.br/portal/img/not-found.png'
-					}}"
-					alt="Avatar"
-					style="width: 100%"
-				/>
+					}}" alt="Avatar" style="width: 100%" />
 			</div>
 			<div class="container">
-				<div  routerLink="/games/review/{{secondGame?._id}}">
+				<div routerLink="/wines/review/{{secondWine?.id}}">
 					<h4>
-						<b style="padding-left: .4em;">{{ secondGame?.title }}</b>
+						<b style="padding-left: .4em;">{{ secondWine?.title }}</b>
 					</h4>
 				</div>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Gênero: {{ secondGame?.genre }}</b><br>
-                <b style="padding-left: .4em;font-size: .8em; margin-bottom: 0;">Nota: {{ secondGame?.rating }} </b><br>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Desenvolvedor: {{ firstGame?.developer }} </b><br>
-				<p style="padding-left: .4em;"><b>Descrição: </b>{{ secondGame?.summary }}</p>
+				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Gênero: {{ secondWine?.genre
+					}}</b><br>
+				<b style="padding-left: .4em;font-size: .8em; margin-bottom: 0;">Nota: {{ secondWine?.rating }} </b><br>
+				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Desenvolvedor: {{ firstWine?.developer
+					}} </b><br>
+				<p style="padding-left: .4em;"><b>Descrição: </b>{{ secondWine?.summary }}</p>
 			</div>
 		</div>
 		<div class="star-container">
-			<img
-				class="star-img"
+			<img class="star-img"
 				src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png"
-				alt=""
-			/>
-			<img
-				class="star-img"
+				alt="" />
+			<img class="star-img"
 				src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png"
-				alt=""
-			/>
+				alt="" />
 		</div>
 		<p class="rated">2° Mais bem votado</p>
 	</div>
-	<div *ngIf="thirdGame" class="card-wrapper">
+	<div *ngIf="thirdWine" class="card-wrapper">
 		<div class="card">
-			<div routerLink="/games/review/{{thirdGame?._id}}" >
-				<img
-					src="{{
-						thirdGame?.imgPath
-							? thirdGame.imgPath
+			<div routerLink="/wines/review/{{thirdWine?.id}}">
+				<img src="{{
+						thirdWine?.imgPath
+							? thirdWine.imgPath
 							: 'http://radioingamar.com.br/portal/img/not-found.png'
-					}}"
-					alt="Avatar"
-					style="width: 100%"
-				/>
+					}}" alt="Avatar" style="width: 100%" />
 			</div>
 			<div class="container">
-				<div routerLink="/games/review/{{thirdGame?._id}}" >
+				<div routerLink="/wines/review/{{thirdWine?.id}}">
 					<h4>
-						<b style="padding-left: .4em;">{{ thirdGame?.title }}</b>
+						<b style="padding-left: .4em;">{{ thirdWine?.title }}</b>
 					</h4>
 				</div>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Gênero: {{ thirdGame?.genre }}</b><br>
-                <b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Nota: {{ thirdGame?.rating }} </b><br>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Desenvolvedor: {{ firstGame?.developer }} </b><br>
-				<p style="padding-left: .4em;"><b>Descrição: </b>{{ thirdGame?.summary }}</p>
+				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Gênero: {{ thirdWine?.genre }}</b><br>
+				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Nota: {{ thirdWine?.rating }} </b><br>
+				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Desenvolvedor: {{ firstWine?.developer
+					}} </b><br>
+				<p style="padding-left: .4em;"><b>Descrição: </b>{{ thirdWine?.summary }}</p>
 			</div>
 		</div>
 		<div class="star-container">
-			<img
-				class="star-img"
+			<img class="star-img"
 				src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png"
-				alt=""
-			/>
+				alt="" />
 		</div>
 		<p class="rated">3° Mais bem votado</p>
 	</div>

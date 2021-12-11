@@ -1,5 +1,5 @@
 import { DialogComponent } from './dialog/dialog.component';
-import { Game } from './../models/game.model';
+import { Wine } from './../models/wine.model';
 import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType  } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
@@ -12,9 +12,9 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class GameService {
+export class WineService {
 
-  baseUrl = 'http://localhost:3001/games'
+  baseUrl = 'http://localhost:3001/wines'
 
   constructor(private snackBar: MatSnackBar, private http: HttpClient, private dialog: MatDialog) {}
 
@@ -38,47 +38,47 @@ export class GameService {
     this.dialog.open(DialogComponent, {data: {summary: summaryCapture}})
   }
 
-  create(game: Game): Observable<Game> {
-    return this.http.post<Game>(this.baseUrl, game).pipe(
+  create(wine: Wine): Observable<Wine> {
+    return this.http.post<Wine>(this.baseUrl, wine).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );
   }
 
-  read(): Observable<Game[]> {
-    return this.http.get<Game[]>(`${this.baseUrl}`).pipe(
+  read(): Observable<Wine[]> {
+    return this.http.get<Wine[]>(`${this.baseUrl}`).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );
   }
 
-  gameByConsole(plataforma): Observable<Game[]> {
-    return this.http.get<Game[]>(`${this.baseUrl}/most_rated/${plataforma}`).pipe(
+  wineByConsole(plataforma): Observable<Wine[]> {
+    return this.http.get<Wine[]>(`${this.baseUrl}/most_rated/${plataforma}`).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );
   }
 
   //teste
-  readById(_id: string): Observable<Game> {
-    const url = `${this.baseUrl}/${_id}`;
-    return this.http.get<Game>(url).pipe(
+  readById(id: string): Observable<Wine> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.get<Wine>(url).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );
   }
 
-  update(game: Game): Observable<Game> {
-    const url = `${this.baseUrl}/${game._id}`;
-    return this.http.put<Game>(url, game).pipe(
+  update(wine: Wine): Observable<Wine> {
+    const url = `${this.baseUrl}/${wine.id}`;
+    return this.http.put<Wine>(url, wine).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );
   }
 
-  delete(_id: string): Observable<Game> {
-    const url = `${this.baseUrl}/${_id}`;
-    return this.http.delete<Game>(url).pipe(
+  delete(id: string): Observable<Wine> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.delete<Wine>(url).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );

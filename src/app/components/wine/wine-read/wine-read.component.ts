@@ -1,19 +1,19 @@
 import { HeaderService } from './../../template/header/header.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { GameService } from './../../../services/game.service';
-import { Game } from './../../../models/game.model';
+import { WineService } from './../../../services/wine.service';
+import { Wine } from './../../../models/wine.model';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-game-read',
-    templateUrl: './game-read.component.html',
-    styleUrls: ['./game-read.component.css']
+    selector: 'app-wine-read',
+    templateUrl: './wine-read.component.html',
+    styleUrls: ['./wine-read.component.css']
 })
-export class GameReadComponent implements OnInit {
+export class WineReadComponent implements OnInit {
 
-    games: Game[] = []
+    wines: Wine[] = []
     displayedColumns = ['imgPath', 'title', 'summary', 'developer', 'type', 'genre', 'rating', 'action'];
     filters = [
         { type: 'filteredTitles', attribute: 'title', control: 'titlesControl' }, 
@@ -32,36 +32,36 @@ export class GameReadComponent implements OnInit {
     filteredGenres: any;
     newFilters = []
 
-    constructor(private gameService: GameService, private headerService: HeaderService) { }
+    constructor(private wineService: WineService, private headerService: HeaderService) { }
 
     ngOnInit(): void {
         if (this.username == null) this.displayedColumns.pop()
-        this.gameService.read().subscribe(games => {
-            this.games = games
+        this.wineService.read().subscribe(wines => {
+            this.wines = wines
             this.filters.map(filter => this._multiFilters(filter.type, filter.attribute, filter.control))
         })
         this.statusTable = true
     }
 
-    displayTitles(game: Game): string {
-        return game && game.title ? game.title : '';
+    displayTitles(wine: Wine): string {
+        return wine && wine.title ? wine.title : '';
     }
 
-    displayDevelopers(game: Game): string {
-        return game && game.developer ? game.developer : '';
+    displayDevelopers(wine: Wine): string {
+        return wine && wine.developer ? wine.developer : '';
     }
     
-    displayGenres(game: Game): string {
-        return game && game.genre ? game.genre : '';
+    displayGenres(wine: Wine): string {
+        return wine && wine.genre ? wine.genre : '';
     }
 
-    private _filter(name: any, attribute: string): Game[] {
+    private _filter(name: any, attribute: string): Wine[] {
         const filterValue = name.toLowerCase();
         return this.newFilters.filter(option => option[attribute].toLowerCase().indexOf(filterValue) === 0);
     }
 
-    private _prepareValuesToFilter(attribute: string): Game[] {
-        this.newFilters = this.games.filter((item, index, self) => index === self.findIndex(i => (i[attribute] === item[attribute]) ) );
+    private _prepareValuesToFilter(attribute: string): Wine[] {
+        this.newFilters = this.wines.filter((item, index, self) => index === self.findIndex(i => (i[attribute] === item[attribute]) ) );
         return this.newFilters;
     }
 
@@ -77,7 +77,7 @@ export class GameReadComponent implements OnInit {
     applyFilter(filter: string) {
         console.log("filter");
         this.statusTable = false
-        this.dataSource = new MatTableDataSource(this.games)
+        this.dataSource = new MatTableDataSource(this.wines)
         this.dataSource.filter = filter.trim().toLowerCase();
     }
 
@@ -90,6 +90,6 @@ export class GameReadComponent implements OnInit {
     }
 
     openDialog(event: string) {
-        this.gameService.openDialog(event)
+        this.wineService.openDialog(event)
     }
 }

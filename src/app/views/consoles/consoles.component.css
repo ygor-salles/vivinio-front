@@ -1,4 +1,4 @@
-.games-container {
+.wines-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,6 +10,7 @@
 .butao {
   color: red;
 }
+
 .titulo-consoles {
   margin-top: 1em;
   font-size: 2em;
@@ -17,11 +18,12 @@
   justify-content: center;
 }
 
-.console-container { 
+.console-container {
   width: 16em;
   cursor: pointer;
 }
-.console-container img { 
+
+.console-container img {
   width: 100%;
 }
 

@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class HeaderService {
 
     private _headerData = new BehaviorSubject<HeaderData>({
-        title: 'Sistema colaborativo de Jogos',
+        title: 'Sistema colaborativo de Vinhos',
         icon: '',
         routeUrl: '',
         username: localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')).name : null

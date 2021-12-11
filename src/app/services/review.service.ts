@@ -37,15 +37,15 @@ export class ReviewService {
         );
     }
 
-    read(game_id: string): Observable<Review[]> {
-        return this.http.get<Review[]>(`${this.baseUrl}?game_id=${game_id}`).pipe(
+    read(wine_id: string): Observable<Review[]> {
+        return this.http.get<Review[]>(`${this.baseUrl}?wine_id=${wine_id}`).pipe(
             map((obj) => obj),
             catchError((e) => this.errorHandler(e))
         );
     }
 
-    readById(_id: string): Observable<Review> {
-        const url = `${this.baseUrl}/${_id}`;
+    readById(id: string): Observable<Review> {
+        const url = `${this.baseUrl}/${id}`;
         return this.http.get<Review>(url).pipe(
             map((obj) => obj),
             catchError((e) => this.errorHandler(e))
@@ -53,15 +53,15 @@ export class ReviewService {
     }
 
     update(review: Review): Observable<Review> {
-        const url = `${this.baseUrl}/${review._id}`;
+        const url = `${this.baseUrl}/${review.id}`;
         return this.http.put<Review>(url, review).pipe(
             map((obj) => obj),
             catchError((e) => this.errorHandler(e))
         );
     }
 
-    delete(_id: string): Observable<Review> {
-        const url = `${this.baseUrl}/${_id}`;
+    delete(id: string): Observable<Review> {
+        const url = `${this.baseUrl}/${id}`;
         return this.http.delete<Review>(url).pipe(
             map((obj) => obj),
             catchError((e) => this.errorHandler(e))
@@ -69,7 +69,7 @@ export class ReviewService {
     }
 
     review(review: Review): Observable<Review> {
-        const url = `${this.baseUrl}?game_id=${review.game_id}`;
+        const url = `${this.baseUrl}?wine_id=${review.wine_id}`;
         return this.http.put<Review>(url, review).pipe(
             map((obj) => obj),
             catchError((e) => this.errorHandler(e))

@@ -1,33 +1,43 @@
 <mat-card class="mat-elevation-z8">
-    <mat-card-subtitle>Apenas será considerado o filtro onde você estiver digitando, ou seja, sem combinações.</mat-card-subtitle>
+    <mat-card-subtitle>Apenas será considerado o filtro onde você estiver digitando, ou seja, sem combinações.
+    </mat-card-subtitle>
     <form>
 
         <mat-form-field class="example-full-width">
             <mat-label>Título</mat-label>
-            <input type="text" placeholder="Ex. Uncharted" matInput [formControl]="titlesControl" [matAutocomplete]="autoTitle" (input)="applyFilter($event.target.value)" (keyup.enter)="applyFilter($event.target.value)">
+            <input type="text" placeholder="Ex. Uncharted" matInput [formControl]="titlesControl"
+                [matAutocomplete]="autoTitle" (input)="applyFilter($event.target.value)"
+                (keyup.enter)="applyFilter($event.target.value)">
             <mat-autocomplete #autoTitle="matAutocomplete" [displayWith]="displayTitles">
-                <mat-option *ngFor="let game of filteredTitles | async" [value]="game" (click)="applyFilter($event.target.innerText)">
-                    {{game.title}}
+                <mat-option *ngFor="let wine of filteredTitles | async" [value]="wine"
+                    (click)="applyFilter($event.target.innerText)">
+                    {{wine.title}}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
             <mat-label>Desenvolvedor</mat-label>
-            <input type="text" placeholder="Ex. Naughty Dog" matInput [formControl]="developersControl" [matAutocomplete]="autoDeveloper" (input)="applyFilter($event.target.value)" (keyup.enter)="applyFilter($event.target.value)">
-            <mat-autocomplete #autoDeveloper="matAutocomplete" [displayWith]="displayDevelopers" >
-                <mat-option *ngFor="let game of filteredDevelopers | async" [value]="game" (click)="applyFilter($event.target.innerText)">
-                    {{ game.developer }}
+            <input type="text" placeholder="Ex. Naughty Dog" matInput [formControl]="developersControl"
+                [matAutocomplete]="autoDeveloper" (input)="applyFilter($event.target.value)"
+                (keyup.enter)="applyFilter($event.target.value)">
+            <mat-autocomplete #autoDeveloper="matAutocomplete" [displayWith]="displayDevelopers">
+                <mat-option *ngFor="let wine of filteredDevelopers | async" [value]="wine"
+                    (click)="applyFilter($event.target.innerText)">
+                    {{ wine.developer }}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
             <mat-label>Gênero</mat-label>
-            <input type="text" placeholder="Ex. Ação" matInput [formControl]="genresControl" [matAutocomplete]="autoGenre" (input)="applyFilter($event.target.value)" (keyup.enter)="applyFilter($event.target.value)">
-            <mat-autocomplete #autoGenre="matAutocomplete" [displayWith]="displayGenres" >
-                <mat-option *ngFor="let game of filteredGenres | async" [value]="game" (click)="applyFilter($event.target.innerText)">
-                    {{ game.genre }}
+            <input type="text" placeholder="Ex. Ação" matInput [formControl]="genresControl"
+                [matAutocomplete]="autoGenre" (input)="applyFilter($event.target.value)"
+                (keyup.enter)="applyFilter($event.target.value)">
+            <mat-autocomplete #autoGenre="matAutocomplete" [displayWith]="displayGenres">
+                <mat-option *ngFor="let wine of filteredGenres | async" [value]="wine"
+                    (click)="applyFilter($event.target.innerText)">
+                    {{ wine.genre }}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
@@ -37,13 +47,13 @@
 
 <div class="mat-elevation-z8" class="example-container">
 
-    <table *ngIf="statusTable" mat-table [dataSource]="games" class="mat-elevation-z8">
+    <table *ngIf="statusTable" mat-table [dataSource]="wines" class="mat-elevation-z8">
 
         <!-- Image Column -->
         <ng-container matColumnDef="imgPath">
             <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef> Capa </th>
             <td mat-cell *matCellDef="let row">
-                <a routerLink="/games/review/{{ row._id }}">
+                <a routerLink="/wines/review/{{ row.id }}">
                     <div *ngIf="row.imgPath">
                         <img src="{{row.imgPath}}" height="120" width="120" />
                     </div>
@@ -58,7 +68,7 @@
         <ng-container matColumnDef="title">
             <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef>Titulo</th>
             <td mat-cell *matCellDef="let row">
-                <a routerLink="/games/review/{{ row._id }}">
+                <a routerLink="/wines/review/{{ row.id }}">
                     {{row.title}}
                 </a>
             </td>
@@ -101,12 +111,12 @@
             <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef>Ações</th>
             <td mat-cell *matCellDef="let row">
                 <div *ngIf="user_id==row.user_id">
-                    <a routerLink="/games/update/{{ row._id }}" class="edit">
+                    <a routerLink="/wines/update/{{ row.id }}" class="edit">
                         <i class="material-icons">
                             edit
                         </i>
                     </a>
-                    <a routerLink="/games/delete/{{ row._id }}" class="delete">
+                    <a routerLink="/wines/delete/{{ row.id }}" class="delete">
                         <i class="material-icons">
                             delete
                         </i>
@@ -130,7 +140,7 @@
         <ng-container matColumnDef="imgPath">
             <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef> Capa </th>
             <td mat-cell *matCellDef="let row">
-                <a routerLink="/games/review/{{ row._id }}">
+                <a routerLink="/wines/review/{{ row.id }}">
                     <img src="{{row.imgPath}}" height="120" width="120" />
                 </a>
             </td>
@@ -140,7 +150,7 @@
         <ng-container matColumnDef="title">
             <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef>Titulo</th>
             <td mat-cell *matCellDef="let row">
-                <a routerLink="/games/review/{{ row._id }}">
+                <a routerLink="/wines/review/{{ row.id }}">
                     {{row.title}}
                 </a>
             </td>
@@ -183,12 +193,12 @@
             <th mat-header-cell *matHeaderCellDef>Ações</th>
             <td mat-cell *matCellDef="let row">
                 <div *ngIf="user_id==row.user_id">
-                    <a routerLink="/games/update/{{ row._id }}" class="edit">
+                    <a routerLink="/wines/update/{{ row.id }}" class="edit">
                         <i class="material-icons">
                             edit
                         </i>
                     </a>
-                    <a routerLink="/games/delete/{{ row._id }}" class="delete">
+                    <a routerLink="/wines/delete/{{ row.id }}" class="delete">
                         <i class="material-icons">
                             delete
                         </i>
@@ -207,8 +217,8 @@
     </table>
 </div>
 
-<div *ngIf="games.length == 0">
+<div *ngIf="wines.length == 0">
     <mat-card>
-        Ainda não há jogos cadastrados! Para contribuir você precisa estar logado
+        Ainda não há vinhos cadastrados! Para contribuir você precisa estar logado
     </mat-card>
 </div>

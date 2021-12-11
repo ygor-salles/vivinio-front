@@ -1,22 +1,22 @@
-import { HeaderService } from './../../components/template/header/header.service';
+import { HeaderService } from '../../components/template/header/header.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-games-crud',
-    templateUrl: './games-crud.component.html',
-    styleUrls: ['./games-crud.component.css']
+    selector: 'app-wines-crud',
+    templateUrl: './wines-crud.component.html',
+    styleUrls: ['./wines-crud.component.css']
 })
-export class GamesCrudComponent implements OnInit {
+export class WinesCrudComponent implements OnInit {
 
     constructor(
         private router: Router,
         private headerService: HeaderService
     ) {
         Object.assign(headerService.headerData, {
-            title: 'Cadastro de Games',
+            title: 'Cadastro de Wines',
             icon: 'sports_esports',
-            routeUrl: '/games'
+            routeUrl: '/wines'
         })
     }
 
@@ -27,8 +27,8 @@ export class GamesCrudComponent implements OnInit {
         return localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')).id : null
     }
 
-    navigateToGameCreate() {
-        this.router.navigate(['/games/create'])
+    navigateToWineCreate() {
+        this.router.navigate(['/wines/create'])
     }
 
 }

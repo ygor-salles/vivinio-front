@@ -1,29 +1,29 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Game } from 'src/app/models/game.model';
-import { GameService } from 'src/app/services/game.service';
+import { Wine } from 'src/app/models/wine.model';
+import { WineService } from 'src/app/services/wine.service';
 
 @Component({
-    selector: 'app-game-update',
-    templateUrl: './game-update.component.html',
-    styleUrls: ['./game-update.component.css']
+    selector: 'app-wine-update',
+    templateUrl: './wine-update.component.html',
+    styleUrls: ['./wine-update.component.css']
 })
-export class GameUpdateComponent implements OnInit {
-    game: Game = {} as Game;
+export class WineUpdateComponent implements OnInit {
+    wine: Wine = {} as Wine;
     genres = ['Ação', 'Aventura', 'Estratégia', 'RPG', 'Esporte', 'Simulação']
 
     @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef; files = [];
 
     constructor(
-        private gameService: GameService,
+        private wineService: WineService,
         private router: Router,
         private route: ActivatedRoute
     ) { }
 
     ngOnInit(): void {
         const id = this.route.snapshot.paramMap.get("id");
-        this.gameService.readById(id).subscribe((game) => {
-            this.game = game;
+        this.wineService.readById(id).subscribe((wine) => {
+            this.wine = wine;
         });
     }
 
@@ -36,21 +36,21 @@ export class GameUpdateComponent implements OnInit {
                 image.src = e.target.result;
                 image.onload = rs => {
                     const imgBase64Path = e.target.result;
-                    this.game.imgPath = imgBase64Path
+                    this.wine.imgPath = imgBase64Path
                 };
             };
             reader.readAsDataURL(imgFile.target.files[0]);
         }
     }
 
-    updateGame(): void {
-        this.gameService.update(this.game).subscribe(() => {
-            this.gameService.showMessage("Jogo atualizado com sucesso!");
-            this.router.navigate(["/games"]);
+    updateWine(): void {
+        this.wineService.update(this.wine).subscribe(() => {
+            this.wineService.showMessage("Vinho atualizado com sucesso!");
+            this.router.navigate(["/wines"]);
         });
     }
 
     cancel(): void {
-        this.router.navigate(["/games"]);
+        this.router.navigate(["/wines"]);
     }
 }

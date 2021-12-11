@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
         }
         this.userService.login(body).subscribe(user => {
             this.headerService.headerData.username = user.name
-            localStorage.setItem('currentUser', JSON.stringify({name: user.name, id: user._id}));
+            localStorage.setItem('currentUser', JSON.stringify({name: user.name, id: user.id}));
             this.appComponent.redirectFromLoginToHome()
         });
     }

@@ -1,8 +1,8 @@
 import { HeaderService } from './../../components/template/header/header.service';
 import { Component, OnInit } from '@angular/core';
-import { GameService } from '../../services/game.service';
+import { WineService } from '../../services/wine.service';
 import { ActivatedRoute } from "@angular/router";
-import { Game } from "src/app/models/game.model";
+import { Wine } from "src/app/models/wine.model";
 
 @Component({
   selector: 'app-top-rated',
@@ -11,14 +11,14 @@ import { Game } from "src/app/models/game.model";
 })
 export class TopRatedComponent implements OnInit {
   options: any;
-  firstGame: Game 
-  secondGame: Game 
-  thirdGame: Game 
+  firstWine: Wine 
+  secondWine: Wine 
+  thirdWine: Wine 
   plataforma: any
   
-  constructor(private route: ActivatedRoute,private gameService: GameService, private headerService: HeaderService) { 
+  constructor(private route: ActivatedRoute,private wineService: WineService, private headerService: HeaderService) { 
     Object.assign(headerService.headerData, {
-      title: 'Top games',
+      title: 'Top wines',
       icon: 'star_border',
       routeUrl: '/top'
     })
@@ -26,11 +26,11 @@ export class TopRatedComponent implements OnInit {
 
   ngOnInit(): void {
     this.plataforma = this.route.snapshot.paramMap.get('plataforma')
-    this.gameService.gameByConsole(this.plataforma).subscribe(games => {
+    this.wineService.wineByConsole(this.plataforma).subscribe(wines => {
       
-      this.firstGame = games[0] || null
-      this.secondGame = games[1]  || null
-      this.thirdGame = games[2] || null
+      this.firstWine = wines[0] || null
+      this.secondWine = wines[1]  || null
+      this.thirdWine = wines[2] || null
     })
   }
 
