@@ -11,6 +11,7 @@ import { WineService } from 'src/app/services/wine.service';
 export class WineUpdateComponent implements OnInit {
     wine: Wine = {} as Wine;
     genres = ['Ação', 'Aventura', 'Estratégia', 'RPG', 'Esporte', 'Simulação']
+    imgBase64Path: string
 
     @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef; files = [];
 
@@ -21,7 +22,7 @@ export class WineUpdateComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        const id = this.route.snapshot.paramMap.get("id");
+        const id = +this.route.snapshot.paramMap.get("id");
         this.wineService.readById(id).subscribe((wine) => {
             this.wine = wine;
         });
@@ -29,16 +30,18 @@ export class WineUpdateComponent implements OnInit {
 
     uploadFileEvt(imgFile: any) {
         if (imgFile.target.files && imgFile.target.files[0]) {
+            
+            this.wine.image = imgFile.target.files[0];
             // HTML5 FileReader API
             let reader = new FileReader();
             reader.onload = (e: any) => {
                 let image = new Image();
                 image.src = e.target.result;
                 image.onload = rs => {
-                    const imgBase64Path = e.target.result;
-                    this.wine.imgPath = imgBase64Path
+                    this.imgBase64Path = e.target.result;
                 };
             };
+            console.log(imgFile.target);
             reader.readAsDataURL(imgFile.target.files[0]);
         }
     }

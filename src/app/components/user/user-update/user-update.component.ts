@@ -19,7 +19,7 @@ export class UserUpdateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id')
+    const id = +this.route.snapshot.paramMap.get('id')
     this.userService.readById(id).subscribe((user) => {
         delete user.password
         this.user = user;

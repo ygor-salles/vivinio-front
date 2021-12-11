@@ -2,18 +2,31 @@
     <mat-card-title>Excluir Vinho</mat-card-title>
     <form>
         <mat-form-field>
-            <input matInput placeholder="Titulo" [value]="wine.title" name="title" disabled>
+            <input matInput placeholder="Nome" [(ngModel)]="wine.name" name="name" disabled>
         </mat-form-field>
+
         <mat-form-field>
-            <mat-label>Resumo</mat-label>
-            <textarea matInput [(ngModel)]="wine.summary" name="summary" disabled></textarea>
+            <input matInput placeholder="Produto" [(ngModel)]="wine.producer" name="producer" disabled>
         </mat-form-field>
+
         <mat-form-field>
-            <input matInput placeholder="Desenvolvedor" [value]="wine.developer" name="developer" disabled>
+            <input matInput placeholder="País" [(ngModel)]="wine.country" name="country" disabled>
         </mat-form-field>
+
         <mat-form-field>
-            <input matInput placeholder="Gênero" [value]="wine.genre" name="genre" disabled>
+            <input matInput placeholder="Tipo de Vinho" [(ngModel)]="wine.type" name="type" disabled>
         </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Tipo de uva" [(ngModel)]="wine.type_grape" name="type_grape" disabled>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Harmonização" [(ngModel)]="wine.harmonizing" name="harmonizing" disabled>
+        </mat-form-field>
+
+
+
     </form>
     <button mat-raised-button (click)="deleteWine()" color="warn">
         Excluir

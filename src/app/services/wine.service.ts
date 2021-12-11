@@ -8,13 +8,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+
+const { apiUrl } = environment;
 
 @Injectable({
   providedIn: 'root'
 })
 export class WineService {
 
-  baseUrl = 'http://localhost:3001/wines'
+  baseUrl = `${apiUrl}/wines`;
 
   constructor(private snackBar: MatSnackBar, private http: HttpClient, private dialog: MatDialog) {}
 
@@ -60,7 +63,7 @@ export class WineService {
   }
 
   //teste
-  readById(id: string): Observable<Wine> {
+  readById(id: number): Observable<Wine> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.get<Wine>(url).pipe(
       map((obj) => obj),
@@ -76,7 +79,7 @@ export class WineService {
     );
   }
 
-  delete(id: string): Observable<Wine> {
+  delete(id: number): Observable<Wine> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.delete<Wine>(url).pipe(
       map((obj) => obj),

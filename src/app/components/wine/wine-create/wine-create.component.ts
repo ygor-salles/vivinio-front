@@ -46,7 +46,6 @@ export class WineCreateComponent implements OnInit {
                 let image = new Image();
                 image.src = e.target.result;
                 image.onload = rs => {
-                    console.log('Caiu');
                     this.imgBase64Path = e.target.result;
                 };
             };
@@ -56,7 +55,7 @@ export class WineCreateComponent implements OnInit {
     }
 
     createWine() {
-        this.wine.user_id = JSON.parse(localStorage.getItem('currentUser')).id
+        // this.wine.user_id = JSON.parse(localStorage.getItem('currentUser')).id
         console.log(this.wine)
         // this.wineService.create(this.wine).subscribe(() => {
         //     this.wineService.showMessage('Vinho cadastrado com sucesso')

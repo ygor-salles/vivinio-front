@@ -38,28 +38,28 @@ export class ReviewReadComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.review.wine_id = this.route.snapshot.paramMap.get('id');
+        this.review.wine_id = +this.route.snapshot.paramMap.get('id');
         this.wineService.readById(this.review.wine_id).subscribe(wine => {
-            this.wineTitle = wine.title
+            this.wineTitle = ''
         })
         this.reviewService.read(this.review.wine_id).subscribe(reviews => {
             this.reviews = reviews
         })
     }
 
-    insertReview(): void {
-        this.review.rate = Number(this.review.rate);
-        this.review.user_id = this.user_id;
-        if (this.review.rate >= 0 && this.review.rate <= 10) {
-            this.reviewService.create(this.review).subscribe((): void => {
-                this.reviewService.showMessage("Avaliação salva com sucesso!");
-                this.router.navigate([`/wines/review/${this.review.wine_id}`]);
-                this.appComponent.redirectFromLoginToCurrent()
-            });
-        } else {
-            this.reviewService.showMessage("Favor inserir uma nota entre 0 e 10", true);
-        }
-    }
+    // insertReview(): void {
+    //     this.review.rate = Number(this.review.rate);
+    //     this.review.user_id = this.user_id;
+    //     if (this.review.rate >= 0 && this.review.rate <= 10) {
+    //         this.reviewService.create(this.review).subscribe((): void => {
+    //             this.reviewService.showMessage("Avaliação salva com sucesso!");
+    //             this.router.navigate([`/wines/review/${this.review.wine_id}`]);
+    //             this.appComponent.redirectFromLoginToCurrent()
+    //         });
+    //     } else {
+    //         this.reviewService.showMessage("Favor inserir uma nota entre 0 e 10", true);
+    //     }
+    // }
 
     deleteReview(id: string): void {
         this.reviewService.delete(id).subscribe(() => {

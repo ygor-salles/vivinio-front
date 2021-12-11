@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { DialogComponent } from './dialog/dialog.component';
 import { Review } from '../models/review.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -8,12 +9,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
+const { apiUrl } = environment;
+
 @Injectable({
     providedIn: 'root'
 })
 export class ReviewService {
 
-    baseUrl = 'http://localhost:3001/ratings'
+    baseUrl = `${apiUrl}/reviews`
 
     constructor(private snackBar: MatSnackBar, private http: HttpClient, private dialog: MatDialog) { }
 
@@ -37,7 +40,7 @@ export class ReviewService {
         );
     }
 
-    read(wine_id: string): Observable<Review[]> {
+    read(wine_id: number): Observable<Review[]> {
         return this.http.get<Review[]>(`${this.baseUrl}?wine_id=${wine_id}`).pipe(
             map((obj) => obj),
             catchError((e) => this.errorHandler(e))

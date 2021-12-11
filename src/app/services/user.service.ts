@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { EMPTY, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
@@ -6,12 +7,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+const { apiUrl } = environment;
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  baseUrl = 'http://localhost:3001/users';
+  baseUrl = `${apiUrl}/users`;
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
@@ -52,7 +55,7 @@ export class UserService {
     )
   }
 
-  readById(id: string): Observable<User> {
+  readById(id: number): Observable<User> {
     const url = `${this.baseUrl}/${id}`
     return this.http.get<User>(url).pipe(
       map(obj => obj),

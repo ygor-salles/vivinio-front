@@ -38,21 +38,22 @@ export class WineReadComponent implements OnInit {
         if (this.username == null) this.displayedColumns.pop()
         this.wineService.read().subscribe(wines => {
             this.wines = wines
+            console.log(this.wines)
             this.filters.map(filter => this._multiFilters(filter.type, filter.attribute, filter.control))
         })
         this.statusTable = true
     }
 
     displayTitles(wine: Wine): string {
-        return wine && wine.title ? wine.title : '';
+        return wine && wine.country ? wine.country : '';
     }
 
     displayDevelopers(wine: Wine): string {
-        return wine && wine.developer ? wine.developer : '';
+        return wine && wine.type ? wine.type : '';
     }
     
     displayGenres(wine: Wine): string {
-        return wine && wine.genre ? wine.genre : '';
+        return wine && wine.type_grape ? wine.type_grape : '';
     }
 
     private _filter(name: any, attribute: string): Wine[] {

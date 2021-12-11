@@ -11,3 +11,21 @@ button {
 img {
     width: 30%
 }
+
+.label {
+    margin: 30px 0 20px 15px;
+    color: purple;
+}
+
+input[type='file'] {
+    display: none
+}
+
+.label-input-file {
+    background-color: purple;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    margin: 10px;
+    padding: 6px 20px
+}

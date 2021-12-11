@@ -12,9 +12,8 @@ import { UserService } from '../../../services/user.service';
 export class UserCreateComponent implements OnInit {
 
   user: User = {
-    id: '',
-    email: '',
     name: '',
+    email: '',
     password: ''
   }
 
@@ -30,10 +29,11 @@ export class UserCreateComponent implements OnInit {
   createUser(): void {
     if(this.senha1 == this.senha2){
       this.user.password = this.senha1
-      this.userService.create(this.user).subscribe(() => {
-        this.userService.showMessage('Usuário cadastrado com sucesso')
-        this.router.navigate(['users'])
-      })
+      console.log(this.user)
+      // this.userService.create(this.user).subscribe(() => {
+      //   this.userService.showMessage('Usuário cadastrado com sucesso')
+      //   this.router.navigate(['users'])
+      // })
     }
     else{
       this.userService.showMessage('As senhas dos campos devem ser iguais', true)

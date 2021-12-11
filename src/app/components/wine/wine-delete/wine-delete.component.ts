@@ -18,7 +18,7 @@ export class WineDeleteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('id');
     this.wineService.readById(id).subscribe((wine) => {
       this.wine = wine;
     });
