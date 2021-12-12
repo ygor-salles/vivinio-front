@@ -42,7 +42,17 @@ export class WineService {
   }
 
   create(wine: Wine): Observable<Wine> {
-    return this.http.post<Wine>(this.baseUrl, wine).pipe(
+    const formData: FormData = new FormData();
+    formData.append('name', wine.name)
+    formData.append('producer', wine.producer)
+    formData.append('country', wine.country)
+    formData.append('type', wine.type)
+    formData.append('type_grape', wine.type_grape)
+    formData.append('harmonizing', wine.harmonizing)
+    formData.append('image', wine.image, wine.image.name)
+    formData.append('user_id', wine.user_id)
+
+    return this.http.post<Wine>(this.baseUrl, formData).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );
@@ -72,8 +82,18 @@ export class WineService {
   }
 
   update(wine: Wine): Observable<Wine> {
+    const formData: FormData = new FormData();
+    formData.append('name', wine.name)
+    formData.append('producer', wine.producer)
+    formData.append('country', wine.country)
+    formData.append('type', wine.type)
+    formData.append('type_grape', wine.type_grape)
+    formData.append('harmonizing', wine.harmonizing)
+    formData.append('image', wine.image, wine.image.name)
+    formData.append('user_id', wine.user_id)
+
     const url = `${this.baseUrl}/${wine.id}`;
-    return this.http.put<Wine>(url, wine).pipe(
+    return this.http.put<Wine>(url, formData).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );
