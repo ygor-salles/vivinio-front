@@ -45,176 +45,52 @@
     </form>
 </mat-card>
 
-<div class="mat-elevation-z8" class="example-container">
+<div class="flex-container">
+    <div *ngFor="let wine of wines; let i = index;" class="item-card">
+        <mat-card class="flex-item card-container mat-elevation-z8">
 
-    <table *ngIf="statusTable" mat-table [dataSource]="wines" class="mat-elevation-z8">
+            <mat-card-header (click)="abrirModalDetalhes(wine)">
+                <mat-card-title>{{ wine.name }}</mat-card-title>
+            </mat-card-header>
 
-        <!-- Image Column -->
-        <ng-container matColumnDef="imgPath">
-            <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef> Capa </th>
-            <td mat-cell *matCellDef="let row">
-                <a routerLink="/wines/review/{{ row.id }}">
-                    <div *ngIf="row.imgPath">
-                        <img src="{{row.imgPath}}" height="120" width="120" />
+            <!-- <mat-card-content class="card-content cursor-pointer" (click)="abrirModalDetalhes(wine)">
+                <div *ngIf="wine.imagens.length === 0; else elseImagens">
+                    <img class="card-image" src="../../../assets/img/dump3.png" alt="Dump">
+                </div>
+                <ng-template #elseImagens>
+                    <div *ngFor="let image of wine.imagens">
+                        <img *ngIf="image.destaque" class="card-image" [src]="transformImageUrl(image.url)"
+                            onerror="this.src='../../../assets/img/dump3.png'" alt="Photo: {{wine.id}}">
                     </div>
-                    <div *ngIf="!row.imgPath">
-                        Não há imagem cadastrada
-                    </div>
-                </a>
-            </td>
-        </ng-container>
+                </ng-template>
+                <span class="preco-avista">{{ wine.preco_avista | currency }} à vista</span>
+                <span class="preco-parcelado">{{ wine.preco_parcelado | currency }} parcelado</span>
+                <hr>
+            </mat-card-content>
 
-        <!-- Title Column -->
-        <ng-container matColumnDef="title">
-            <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef>Titulo</th>
-            <td mat-cell *matCellDef="let row">
-                <a routerLink="/wines/review/{{ row.id }}">
-                    {{row.title}}
-                </a>
-            </td>
-        </ng-container>
-
-        <!-- Summary Column -->
-        <ng-container matColumnDef="summary">
-            <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef>Resumo</th>
-            <td mat-cell *matCellDef="let row" (click)="openDialog(row.summary)">
-                <a style="cursor:pointer; color: rgb(72, 153, 247);">Ver resumo</a>
-            </td>
-        </ng-container>
-
-        <!-- Developer Column -->
-        <ng-container matColumnDef="developer">
-            <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef>Desenvolvedor</th>
-            <td mat-cell *matCellDef="let row">{{ row.developer }}</td>
-        </ng-container>
-
-        <!-- Genre Column -->
-        <ng-container matColumnDef="genre">
-            <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef>Gênero</th>
-            <td mat-cell *matCellDef="let row">{{ row.genre }}</td>
-        </ng-container>
-
-        <!-- Console Type Column -->
-        <ng-container matColumnDef="type">
-            <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef>Console</th>
-            <td mat-cell *matCellDef="let row">{{ row.type }}</td>
-        </ng-container>
-
-        <!-- Console Rating Column -->
-        <ng-container matColumnDef="rating">
-            <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef>Rating</th>
-            <td mat-cell *matCellDef="let row">{{ row.rating }}</td>
-        </ng-container>
-
-        <!-- Action Column -->
-        <ng-container *ngIf="username!=null" matColumnDef="action">
-            <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef>Ações</th>
-            <td mat-cell *matCellDef="let row">
-                <div *ngIf="user_id==row.user_id">
-                    <a routerLink="/wines/update/{{ row.id }}" class="edit">
-                        <i class="material-icons">
+            <mat-card-actions class="card-actions">
+                <mat-slide-toggle class="col-md-3" #tooltip="matTooltip" matTooltip="Ativar / Desativar"
+                    matTooltipPosition="above" (change)="ativarDesativar(wine)" (click)="$event.stopPropagation()"
+                    [(ngModel)]="wine.ativo">
+                </mat-slide-toggle>
+                <div class="offset-md-4 col-md-5" style="text-align: end;">
+                    <a class="cursor-pointer edit" (click)="dialogEditar(wine)">
+                        <i class="material-icons" #tooltip="matTooltip" matTooltip="Editar exibição"
+                            matTooltipPosition="above">
                             edit
                         </i>
                     </a>
-                    <a routerLink="/wines/delete/{{ row.id }}" class="delete">
-                        <i class="material-icons">
+                    <a class="cursor-pointer delete" (click)="dialogExcluir(wine)">
+                        <i class="material-icons" #tooltip="matTooltip" matTooltip="Excluir exibição"
+                            matTooltipPosition="above">
                             delete
                         </i>
                     </a>
                 </div>
-            </td>
-        </ng-container>
+            </mat-card-actions> -->
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-        <!-- Row shown when there is no matching data. -->
-        <tr class="mat-row" *matNoDataRow>
-            <td colspan="8" class="mat-cell not-found">Nenhum resultado encontrado para o filtro</td>
-        </tr>
-    </table>
-
-    <table *ngIf="!statusTable" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-        <!-- Image Column -->
-        <ng-container matColumnDef="imgPath">
-            <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef> Capa </th>
-            <td mat-cell *matCellDef="let row">
-                <a routerLink="/wines/review/{{ row.id }}">
-                    <img src="{{row.imgPath}}" height="120" width="120" />
-                </a>
-            </td>
-        </ng-container>
-
-        <!-- Title Column -->
-        <ng-container matColumnDef="title">
-            <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef>Titulo</th>
-            <td mat-cell *matCellDef="let row">
-                <a routerLink="/wines/review/{{ row.id }}">
-                    {{row.title}}
-                </a>
-            </td>
-        </ng-container>
-
-        <!-- Summary Column -->
-        <ng-container matColumnDef="summary">
-            <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef>Resumo</th>
-            <td mat-cell *matCellDef="let row" (click)="openDialog(row.summary)">
-                <a style="cursor:pointer; color: rgb(72, 153, 247);">Ver resumo</a>
-            </td>
-        </ng-container>
-
-        <!-- Developer Column -->
-        <ng-container matColumnDef="developer">
-            <th style="text-align: center; margin: 1%;" mat-header-cell *matHeaderCellDef>Desenvolvedor</th>
-            <td mat-cell *matCellDef="let row">{{ row.developer }}</td>
-        </ng-container>
-
-        <!-- Genre Column -->
-        <ng-container matColumnDef="genre">
-            <th mat-header-cell *matHeaderCellDef>Gênero</th>
-            <td mat-cell *matCellDef="let row">{{ row.genre }}</td>
-        </ng-container>
-
-        <!-- Console Type Column -->
-        <ng-container matColumnDef="type">
-            <th mat-header-cell *matHeaderCellDef>Console</th>
-            <td mat-cell *matCellDef="let row">{{ row.type }}</td>
-        </ng-container>
-
-        <!-- Console Rating Column -->
-        <ng-container matColumnDef="rating">
-            <th mat-header-cell *matHeaderCellDef>Rating</th>
-            <td mat-cell *matCellDef="let row">{{ row.rating }}</td>
-        </ng-container>
-
-        <!-- Action Column -->
-        <ng-container *ngIf="username!=null" matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef>Ações</th>
-            <td mat-cell *matCellDef="let row">
-                <div *ngIf="user_id==row.user_id">
-                    <a routerLink="/wines/update/{{ row.id }}" class="edit">
-                        <i class="material-icons">
-                            edit
-                        </i>
-                    </a>
-                    <a routerLink="/wines/delete/{{ row.id }}" class="delete">
-                        <i class="material-icons">
-                            delete
-                        </i>
-                    </a>
-                </div>
-            </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-        <!-- Row shown when there is no matching data. -->
-        <tr class="mat-row" *matNoDataRow>
-            <td colspan="8" class="mat-cell not-found">Nenhum resultado encontrado para o filtro</td>
-        </tr>
-    </table>
+        </mat-card>
+    </div>
 </div>
 
 <div *ngIf="wines.length == 0">

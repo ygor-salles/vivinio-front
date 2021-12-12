@@ -3,6 +3,25 @@ form {
     flex-direction: row;
 }
 
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    text-align: center;
+}
+
+.flex-item {
+    padding: 10px;
+    margin-right: 20px;
+    flex: 50%;
+}
+
+@media (max-width: 800px) {
+    .flex-container {
+        flex-direction: column;
+    }
+}
+
 .mat-form-field {
     margin-right: 30px;
 }
@@ -31,14 +50,6 @@ table {
 
 .delete>i {
     color: #e35e6b;
-}
-
-td:first-child:nth-last-child(7) {
-    width: calc(100%/6);
-}
-
-td:first-child:nth-last-child(8) {
-    width: calc(100%/7);
 }
 
 .mat-form-field {
