@@ -14,7 +14,7 @@ export class WinesCrudComponent implements OnInit {
         private headerService: HeaderService
     ) {
         Object.assign(headerService.headerData, {
-            title: 'Cadastro de Wines',
+            title: 'Cadastro de Vinhos',
             icon: 'sports_esports',
             routeUrl: '/wines'
         })

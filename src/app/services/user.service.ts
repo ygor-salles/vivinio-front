@@ -9,6 +9,12 @@ import { Injectable } from '@angular/core';
 
 const { apiUrl } = environment;
 
+interface Auth {
+  name?: string 
+  password?: string
+  token?: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,8 +54,8 @@ export class UserService {
     )
   }
   
-  login(body: any): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/login`, body).pipe(
+  login(body: Auth): Observable<Auth> {
+    return this.http.post<Auth>(`${apiUrl}/login`, body).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )
