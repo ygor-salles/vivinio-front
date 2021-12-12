@@ -48,6 +48,7 @@ export class HeaderComponent implements OnInit {
     sair(): void {
         this.headerService.headerData.username = null
         localStorage.removeItem('currentUser')
+        localStorage.removeItem('token')
         this.appComponent.redirectFromLoginToCurrent()
     }
 

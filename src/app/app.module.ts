@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 
@@ -50,6 +50,7 @@ import { UserUpdateComponent } from './components/user/user-update/user-update.c
 import { LoginComponent } from './login/login/login.component'; 
 import { TopRatedComponent } from './views/top-rated/top-rated.component';
 import { ConsolesComponent } from './views/consoles/consoles.component';
+import { AutenticacaoInterceptor } from './interceptors/autenticacao.interceptor';
 
 //Services globais
 import { AuthService } from './services/auth.service';
@@ -76,7 +77,7 @@ registerLocaleData(localePt);
     UserUpdateComponent,
     LoginComponent,
     TopRatedComponent,
-    ConsolesComponent
+    ConsolesComponent,
   ],
   imports: [
     BrowserModule,
@@ -110,6 +111,7 @@ registerLocaleData(localePt);
       provide: LOCALE_ID,
       useValue: 'pt-BR'
     },
+    { provide: HTTP_INTERCEPTORS, useClass: AutenticacaoInterceptor, multi: true, },
     AuthService
   ],
   bootstrap: [AppComponent]
