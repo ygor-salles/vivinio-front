@@ -117,6 +117,8 @@ export class HeaderService {
     
       logout(): void {
         window.localStorage.removeItem('token');
+        window.localStorage.removeItem('currentUser');
+        this.headerData.username = null
         // window.localStorage.removeItem('refresh_token');
         this.idUser = null;
         this.username = null;

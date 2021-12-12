@@ -1,3 +1,4 @@
+import { HeaderService } from './../../template/header/header.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/users.model';
@@ -14,7 +15,8 @@ export class UserDeleteComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private route: ActivatedRoute 
+    private route: ActivatedRoute ,
+    private headerService: HeaderService
   ) { }
 
   ngOnInit(): void {
@@ -25,6 +27,7 @@ export class UserDeleteComponent implements OnInit {
   deleteUser(): void {
     this.userService.delete(this.user.id).subscribe(() => {
       this.userService.showMessage('Usuário deletado com sucesso!')
+      this.headerService.logout()
       this.router.navigate(['users'])
     })
   }

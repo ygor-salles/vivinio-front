@@ -27,7 +27,14 @@ export class UserUpdateComponent implements OnInit {
   }
 
   updateUser(): void {
-    this.userService.update(this.user).subscribe(() => {
+    console.log(this.user)
+    const userUpdate = {
+      id: this.user.id,
+      name: this.user.name,
+      email: this.user.email,
+      password: this.user.password
+    }
+    this.userService.update(userUpdate).subscribe(() => {
       this.userService.showMessage('Usuário atualizado com sucesso!')
       this.router.navigate(['/users'])
     })
