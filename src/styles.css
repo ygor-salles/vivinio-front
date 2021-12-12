@@ -1,4 +1,4 @@
-@import '@angular/material/prebuilt-themes/purple-green.css';
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 html, body {
     height: 100%;
@@ -10,7 +10,7 @@ body {
 }
 
 a {
-    color: #ffffff;
+    /* color: #ffffff; */
     text-decoration: none;
     cursor: pointer;
 }
@@ -19,13 +19,13 @@ a {
     width: 83% !important;
 }
 
-.button-in-title {
+/* .button-in-title {
     margin: 0 !important;
     background-color: #ffffff;
     color: black !important;
-}
+} */
 
-.mat-focused .mat-form-field-label, .mat-form-field-infix {
+/* .mat-focused .mat-form-field-label, .mat-form-field-infix {
     color: #ffffff !important;
 }
 
@@ -39,11 +39,11 @@ a {
 
 .mat-input-element {
     caret-color: #ffffff !important;
-}
+} */
 
-span:has(:not(.button-in-title)), input {
+/* span:has(:not(.button-in-title)), input {
     color: #ffffff;
-}
+} */
 
 .msg-error {
     background-color: #ff595e !important;

@@ -9,7 +9,6 @@
 }
 
 .tela {
-    background-image: url('../../../assets/img/783472.jpg');
     height: 73vh;
     display: flex;
     flex-direction: row;
