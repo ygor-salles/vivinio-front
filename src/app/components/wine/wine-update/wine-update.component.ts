@@ -47,6 +47,7 @@ export class WineUpdateComponent implements OnInit {
     }
 
     updateWine(): void {
+        console.log(this.wine);
         this.wineService.update(this.wine).subscribe(() => {
             this.wineService.showMessage("Vinho atualizado com sucesso!");
             this.router.navigate(["/wines"]);

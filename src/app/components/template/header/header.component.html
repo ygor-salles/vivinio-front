@@ -1,15 +1,26 @@
 <mat-toolbar class="header mat-elevation-z4" style="background-color: purple;">
-    <span>
-        <a routerLink="/">
-            <img class="kratos-mini" src="assets/img/kratos-mini.png" alt="Imagem">
+    <span class="title-group">
+        <a mat-list-item routerLink="/">
+            <i class="material-icons">
+                home
+            </i>
+            Início
         </a>
     </span>
     <span class="title-group">
-        <a>
+        <a mat-list-item routerLink="/wines">
             <i class="material-icons">
-                {{ icon }}
+                local_bar
             </i>
-            {{ title }}
+            Vinhos
+        </a>
+    </span>
+    <span class="title-group">
+        <a mat-list-item routerLink="/users">
+            <i class="material-icons">
+                person
+            </i>
+            Usuários
         </a>
     </span>
     <span class="example-spacer"></span>
@@ -27,3 +38,6 @@
         <span>{{ username == null ? 'Logar' : username}}</span>
     </div>
 </mat-toolbar>
+<div class="content">
+    <router-outlet></router-outlet>
+</div>

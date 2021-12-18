@@ -1,20 +1,19 @@
-import { LoginComponent } from './login/login/login.component';
-import { UserUpdateComponent } from './components/user/user-update/user-update.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { UserCreateComponent } from './components/user/user-create/user-create.component';
 import { UserDeleteComponent } from './components/user/user-delete/user-delete.component';
 import { UserReadComponent } from './components/user/user-read/user-read.component';
-import { UserCreateComponent } from './components/user/user-create/user-create.component';
-import { UsersCrudComponent } from './views/users-crud/users-crud.component';
-import { WineUpdateComponent } from './components/wine/wine-update/wine-update.component';
-import { ReviewReadComponent } from './components/wine/wine-review/wine-review.component';
-import { WineReadComponent } from './components/wine/wine-read/wine-read.component';
+import { UserUpdateComponent } from './components/user/user-update/user-update.component';
 import { WineCreateComponent } from './components/wine/wine-create/wine-create.component';
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './views/home/home.component';
-import { WinesCrudComponent } from './views/wines-crud/wines-crud.component';
 import { WineDeleteComponent } from './components/wine/wine-delete/wine-delete.component';
+import { WineReadComponent } from './components/wine/wine-read/wine-read.component';
+import { ReviewReadComponent } from './components/wine/wine-review/wine-review.component';
+import { WineUpdateComponent } from './components/wine/wine-update/wine-update.component';
+import { LoginComponent } from './login/login/login.component';
+import { HomeComponent } from './views/home/home.component';
 import { TopRatedComponent } from "./views/top-rated/top-rated.component";
-import { ConsolesComponent } from "./views/consoles/consoles.component";
+import { UsersCrudComponent } from './views/users-crud/users-crud.component';
+import { WinesCrudComponent } from './views/wines-crud/wines-crud.component';
 
 const routes: Routes = [
   {
@@ -71,17 +70,9 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: "top/:plataforma",
+    path: "top/:id",
     component: TopRatedComponent
   },
-  {
-    path: "consoles",
-    component: ConsolesComponent
-  },
-  {
-    path: "consoles/:plataforma",
-    component: ConsolesComponent
-  }
 ];
 
 @NgModule({

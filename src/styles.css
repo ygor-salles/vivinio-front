@@ -54,5 +54,13 @@ a {
 }
 
 .mat-toolbar.header {
-    padding: 0 16px 0 270px;
+    padding: 0 16px 0 0;
+}
+
+mat-spinner {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
 }

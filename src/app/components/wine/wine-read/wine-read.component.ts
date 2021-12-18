@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { environment } from './../../../../environments/environment';
 import { HeaderService } from './../../template/header/header.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { WineService } from './../../../services/wine.service';
@@ -5,6 +7,8 @@ import { Wine } from './../../../models/wine.model';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
+
+const { apiUrl } = environment;
 
 @Component({
     selector: 'app-wine-read',
@@ -14,46 +18,66 @@ import { map, startWith } from 'rxjs/operators';
 export class WineReadComponent implements OnInit {
 
     wines: Wine[] = []
-    displayedColumns = ['imgPath', 'title', 'summary', 'developer', 'type', 'genre', 'rating', 'action'];
     filters = [
-        { type: 'filteredTitles', attribute: 'title', control: 'titlesControl' }, 
-        { type: 'filteredDevelopers', attribute: 'developer', control: 'developersControl' },
-        { type:'filteredGenres', attribute: 'genre', control: 'genresControl' }
+        { type: 'filteredTitles', attribute: 'title', control: 'pais' }, 
+        { type: 'filteredDevelopers', attribute: 'developer', control: 'tipoVinho' },
+        { type:'filteredGenres', attribute: 'genre', control: 'tipoUva' },
+        { type:'filteredHarmo', attribute: 'harmonizing', control: 'tipoHarmonizacao' }
     ]
     dataSource: any
     statusTable: boolean
 
-    titlesControl = new FormControl();
-    developersControl = new FormControl();
-    genresControl = new FormControl();
+    pais = new FormControl();
+    tipoVinho = new FormControl();
+    tipoUva = new FormControl();
+    tipoHarmonizacao = new FormControl();
 
     filteredDevelopers: any;
     filteredTitles: any;
     filteredGenres: any;
+    filteredHarmo: any;
     newFilters = []
 
-    constructor(private wineService: WineService, private headerService: HeaderService) { }
+    isLogged = false;
+
+    showSpinner = false;
+
+    constructor(
+        private wineService: WineService, 
+        private headerService: HeaderService,
+        private router: Router,
+    ) { }
 
     ngOnInit(): void {
-        if (this.username == null) this.displayedColumns.pop()
+        this.showSpinner = true;
+        this.isLogged = window.localStorage.getItem('token') ? true : false;
+
         this.wineService.read().subscribe(wines => {
             this.wines = wines
-            console.log(this.wines)
+            this.showSpinner = false
             this.filters.map(filter => this._multiFilters(filter.type, filter.attribute, filter.control))
         })
         this.statusTable = true
     }
 
-    displayTitles(wine: Wine): string {
+    transformImageUrl(imageUrl?: string): string {
+        return imageUrl.slice(0, 4) === 'http' ? imageUrl : `${apiUrl}/${imageUrl}`;
+    }
+
+    displayPais(wine: Wine): string {
         return wine && wine.country ? wine.country : '';
     }
 
-    displayDevelopers(wine: Wine): string {
+    displayVinho(wine: Wine): string {
         return wine && wine.type ? wine.type : '';
     }
     
-    displayGenres(wine: Wine): string {
+    displayUva(wine: Wine): string {
         return wine && wine.type_grape ? wine.type_grape : '';
+    }
+
+    displayHarmonizacao(wine: Wine): string {
+        return wine && wine.harmonizing ? wine.harmonizing : '';
     }
 
     private _filter(name: any, attribute: string): Wine[] {
@@ -90,7 +114,7 @@ export class WineReadComponent implements OnInit {
         return localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')).id : null
     }
 
-    openDialog(event: string) {
-        this.wineService.openDialog(event)
+    navegarReview(wine: Wine): void {
+        this.router.navigate([`/top/${wine.id}`])
     }
 }

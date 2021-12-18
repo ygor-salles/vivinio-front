@@ -29,6 +29,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 //Componentes Criados
 import { HeaderComponent } from './components/template/header/header.component';
@@ -49,7 +50,6 @@ import { UserDeleteComponent } from './components/user/user-delete/user-delete.c
 import { UserUpdateComponent } from './components/user/user-update/user-update.component';
 import { LoginComponent } from './login/login/login.component'; 
 import { TopRatedComponent } from './views/top-rated/top-rated.component';
-import { ConsolesComponent } from './views/consoles/consoles.component';
 import { AutenticacaoInterceptor } from './interceptors/autenticacao.interceptor';
 
 //Services globais
@@ -77,7 +77,6 @@ registerLocaleData(localePt);
     UserUpdateComponent,
     LoginComponent,
     TopRatedComponent,
-    ConsolesComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,7 +103,8 @@ registerLocaleData(localePt);
     ReactiveFormsModule,
     MatDividerModule,
     MatProgressBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

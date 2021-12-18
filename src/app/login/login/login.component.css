@@ -1,11 +1,11 @@
-.kratos-mini {
+.vinho-mini {
     max-height: 70px;
 }
 
 .container-login {
     width: 300px;
     height: 350px;
-}   
+}
 
 form {
     display: flex;
@@ -25,4 +25,3 @@ a {
     color: #fff;
     margin-top: 10px;
 }
-

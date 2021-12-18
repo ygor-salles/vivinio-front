@@ -83,14 +83,14 @@ export class WineService {
 
   update(wine: Wine): Observable<Wine> {
     const formData: FormData = new FormData();
-    formData.append('name', wine.name)
-    formData.append('producer', wine.producer)
-    formData.append('country', wine.country)
-    formData.append('type', wine.type)
-    formData.append('type_grape', wine.type_grape)
-    formData.append('harmonizing', wine.harmonizing)
-    formData.append('image', wine.image, wine.image.name)
-    formData.append('user_id', wine.user_id)
+    if (wine.name) formData.append('name', wine.name)
+    if (wine.producer) formData.append('producer', wine.producer)
+    if (wine.country) formData.append('country', wine.country)
+    if (wine.type) formData.append('type', wine.type)
+    if (wine.type_grape) formData.append('type_grape', wine.type_grape)
+    if (wine.harmonizing) formData.append('harmonizing', wine.harmonizing)
+    if (wine.image) formData.append('image', wine.image, wine.image.name)
+    if (wine.user_id) formData.append('user_id', wine.user_id)
 
     const url = `${this.baseUrl}/${wine.id}`;
     return this.http.put<Wine>(url, formData).pipe(
@@ -108,9 +108,7 @@ export class WineService {
   }
 
   errorHandler(e: any): Observable<any> {
-    let message = 'Ocorreu um erro!'
-    if (e.error.message) message = e.error.message
-    this.showMessage(message, true)
+    this.showMessage(e.message || 'Ocorreu um error', true)
     return EMPTY
   }
 }

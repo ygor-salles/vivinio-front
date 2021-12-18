@@ -1,110 +1,84 @@
-<div class="header-button">
-	<button mat-raised-button color="primary">
-		<a routerLink="/consoles">Escolher outro console</a>
-	</button>
+<mat-spinner *ngIf="showSpinner; else notSpinner"></mat-spinner>
+<ng-template #notSpinner>
+	<div class="header-button">
+		<div>
+			<b>
+				{{ wine.name }}
+			</b>
+			-> nota {{ media ? media.toFixed(2) : '--' }}
+		</div>
 
-	<button mat-raised-button color="primary">
-		<a routerLink="/wines">Ver mais vinhos</a>
-	</button>
-</div>
-
-<div class="container-wrapper">
-	<div *ngIf="!firstWine && !secondWine && !thirdWine">
-		Desculpe, não temos vinhos para essa plataforma :(
+		<button mat-raised-button (click)="voltar()">
+			Voltar
+		</button>
 	</div>
 
-	<div *ngIf="firstWine" class="card-wrapper">
-		<div class="card">
-			<div routerLink="/wines/review/{{firstWine?.id}}">
-				<img src="{{ 	firstWine?.imgPath 		? firstWine.imgPath 		: 'http://radioingamar.com.br/portal/img/not-found.png' }}"
-					alt="Avatar" style="width: 100%" />
-			</div>
-			<div class="container">
-				<div routerLink="/wines/review/{{firstWine?.id}}">
-					<h4>
-						<b style="padding-left: .4em;">{{ firstWine?.title }}</b>
-					</h4>
+	<div class="flex-container">
+		<div class="flex-item-first">
+			<img class="image-vinho" [src]="transformImageUrl(wine.image_url)"
+				onerror="this.src='../../../assets/img/dump3.png'" alt="Imagens de produtos">
+		</div>
+		<div class="flex-item-second">
+			<h3><b>Produtor: </b> {{ wine.producer ? wine.producer : '--' }}</h3>
+			<h3><b>País: </b> {{ wine.country ? wine.country : '--' }}</h3>
+			<h3><b>Descrição: </b> {{ wine.description ? wine.description : '--' }}</h3>
+			<h3 *ngIf="wine.reviews.length" class="avaliacao-container">
+				<b>Média de avaliações: </b>
+				<div *ngFor="let item of [].constructor(estrelasOn); let i = index;">
+					<img class="estrela-item" src="../../../assets/img/star_on.gif" alt="acesas">
 				</div>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Gênero: {{ firstWine?.genre }}</b><br>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Nota: {{ firstWine?.rating }} </b><br>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Desenvolvedor: {{ firstWine?.developer
-					}} </b><br>
-				<p style="padding-left: .4em;"><b>Descrição: </b>{{ firstWine?.summary }}</p>
-			</div>
-		</div>
-		<div class="star-container">
-			<img class="star-img"
-				src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png"
-				alt="" />
-			<img class="star-img"
-				src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png"
-				alt="" />
-			<img class="star-img"
-				src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png"
-				alt="" />
-		</div>
-		<p class="rated">1° Mais bem votado</p>
-	</div>
-	<div *ngIf="secondWine" class="card-wrapper">
-		<div class="card">
-			<div routerLink="/wines/review/{{secondWine?.id}}">
-				<img src="{{
-						secondWine && secondWine.imgPath
-							? secondWine.imgPath
-							: 'http://radioingamar.com.br/portal/img/not-found.png'
-					}}" alt="Avatar" style="width: 100%" />
-			</div>
-			<div class="container">
-				<div routerLink="/wines/review/{{secondWine?.id}}">
-					<h4>
-						<b style="padding-left: .4em;">{{ secondWine?.title }}</b>
-					</h4>
+				<div *ngFor="let item of [].constructor(estrelasOff); let i = index;">
+					<img class="estrela-item" src="../../../assets/img/star_off.gif" alt="apagadas">
 				</div>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Gênero: {{ secondWine?.genre
-					}}</b><br>
-				<b style="padding-left: .4em;font-size: .8em; margin-bottom: 0;">Nota: {{ secondWine?.rating }} </b><br>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Desenvolvedor: {{ firstWine?.developer
-					}} </b><br>
-				<p style="padding-left: .4em;"><b>Descrição: </b>{{ secondWine?.summary }}</p>
-			</div>
+			</h3>
 		</div>
-		<div class="star-container">
-			<img class="star-img"
-				src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png"
-				alt="" />
-			<img class="star-img"
-				src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png"
-				alt="" />
+		<div class="flex-item-terc">
+			<h3><b>Tipo de vinho: </b> {{ wine.type ? wine.type : '--' }}</h3>
+			<h3><b>Tipo de uva: </b> {{ wine.type_grape ? wine.type_grape : '--' }}</h3>
+			<h3><b>Harmonização: </b> {{ wine.harmonizing ? wine.harmonizing : '--' }}</h3>
 		</div>
-		<p class="rated">2° Mais bem votado</p>
 	</div>
-	<div *ngIf="thirdWine" class="card-wrapper">
-		<div class="card">
-			<div routerLink="/wines/review/{{thirdWine?.id}}">
-				<img src="{{
-						thirdWine?.imgPath
-							? thirdWine.imgPath
-							: 'http://radioingamar.com.br/portal/img/not-found.png'
-					}}" alt="Avatar" style="width: 100%" />
-			</div>
-			<div class="container">
-				<div routerLink="/wines/review/{{thirdWine?.id}}">
-					<h4>
-						<b style="padding-left: .4em;">{{ thirdWine?.title }}</b>
-					</h4>
-				</div>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Gênero: {{ thirdWine?.genre }}</b><br>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Nota: {{ thirdWine?.rating }} </b><br>
-				<b style="padding-left: .4em; font-size: .8em; margin-bottom: 0;">Desenvolvedor: {{ firstWine?.developer
-					}} </b><br>
-				<p style="padding-left: .4em;"><b>Descrição: </b>{{ thirdWine?.summary }}</p>
-			</div>
-		</div>
-		<div class="star-container">
-			<img class="star-img"
-				src="https://www.freepnglogos.com/uploads/star-png/star-vector-png-transparent-image-pngpix-21.png"
-				alt="" />
-		</div>
-		<p class="rated">3° Mais bem votado</p>
+
+	<div *ngIf="wine.reviews.length > 0; else notReviews">
+		<mat-list *ngFor="let review of wine.reviews">
+			<mat-list-item>
+				{{ review.review }}
+				<h3 class="avaliacao-container-2">
+					<div *ngFor="let item of [].constructor(+(review.evaluation.toFixed(0))); let i = index;">
+						<img class="estrela-item" src="../../../assets/img/star_on.gif" alt="acesas">
+					</div>
+					<div *ngFor="let item of [].constructor(5 - (+(review.evaluation.toFixed(0)))); let i = index;">
+						<img class="estrela-item" src="../../../assets/img/star_off.gif" alt="apagadas">
+					</div>
+				</h3>
+			</mat-list-item>
+			<mat-divider></mat-divider>
+		</mat-list>
 	</div>
-</div>
+	<ng-template #notReviews>
+		<span class="container-wrapper">Não há reviews para este vinho</span>
+	</ng-template>
+
+	<mat-card *ngIf="isLogged" class="mat-elevation-z8">
+		<form>
+			<mat-form-field>
+				<mat-label>Comentário</mat-label>
+				<textarea [(ngModel)]="comentario" matInput name="comentario"></textarea>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-label>Nota</mat-label>
+				<mat-select [(ngModel)]="nota" name="nota">
+					<mat-option [value]=1>1</mat-option>
+					<mat-option [value]=2>2</mat-option>
+					<mat-option [value]=3>3</mat-option>
+					<mat-option [value]=4>4</mat-option>
+					<mat-option [value]=5>5</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</form>
+		<button mat-raised-button (click)="createReview()" color="primary">
+			Salvar
+		</button>
+	</mat-card>
+</ng-template>

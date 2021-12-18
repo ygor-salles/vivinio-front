@@ -12,6 +12,7 @@ export class UserReadComponent implements OnInit {
 
     users: User[]
     displayedColumns = ['name', 'email', 'action']
+    showSpinner = false;
 
     constructor(
         private userService: UserService,
@@ -19,9 +20,13 @@ export class UserReadComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.showSpinner = true
         if (this.username == null) this.displayedColumns.pop()
 
-        this.userService.read().subscribe(users => this.users = users)
+        this.userService.read().subscribe(users => {
+            this.users = users
+            this.showSpinner = false
+        })
     }
 
     get username(): string {

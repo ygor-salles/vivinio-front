@@ -1,100 +1,99 @@
-<mat-card class="mat-elevation-z8">
-    <mat-card-subtitle>Apenas será considerado o filtro onde você estiver digitando, ou seja, sem combinações.
-    </mat-card-subtitle>
-    <form>
+<mat-spinner *ngIf="showSpinner; else notSpinner"></mat-spinner>
+<ng-template #notSpinner>
+    <mat-card class="mat-elevation-z8">
+        <mat-card-subtitle>Apenas será considerado o filtro onde você estiver digitando, ou seja, sem combinações.
+        </mat-card-subtitle>
+        <form>
 
-        <mat-form-field class="example-full-width">
-            <mat-label>Título</mat-label>
-            <input type="text" placeholder="Ex. Uncharted" matInput [formControl]="titlesControl"
-                [matAutocomplete]="autoTitle" (input)="applyFilter($event.target.value)"
-                (keyup.enter)="applyFilter($event.target.value)">
-            <mat-autocomplete #autoTitle="matAutocomplete" [displayWith]="displayTitles">
-                <mat-option *ngFor="let wine of filteredTitles | async" [value]="wine"
-                    (click)="applyFilter($event.target.innerText)">
-                    {{wine.title}}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>País</mat-label>
+                <input type="text" matInput [formControl]="pais" [matAutocomplete]="autoPais"
+                    (input)="applyFilter($event.target.value)" (keyup.enter)="applyFilter($event.target.value)">
+                <mat-autocomplete #autoPais="matAutocomplete" [displayWith]="displayPais">
+                    <mat-option *ngFor="let wine of filteredTitles | async" [value]="wine"
+                        (click)="applyFilter($event.target.innerText)">
+                        {{wine.country}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <mat-label>Desenvolvedor</mat-label>
-            <input type="text" placeholder="Ex. Naughty Dog" matInput [formControl]="developersControl"
-                [matAutocomplete]="autoDeveloper" (input)="applyFilter($event.target.value)"
-                (keyup.enter)="applyFilter($event.target.value)">
-            <mat-autocomplete #autoDeveloper="matAutocomplete" [displayWith]="displayDevelopers">
-                <mat-option *ngFor="let wine of filteredDevelopers | async" [value]="wine"
-                    (click)="applyFilter($event.target.innerText)">
-                    {{ wine.developer }}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Tipo do vinho</mat-label>
+                <input type="text" matInput [formControl]="tipoVinho" [matAutocomplete]="autoVinho"
+                    (input)="applyFilter($event.target.value)" (keyup.enter)="applyFilter($event.target.value)">
+                <mat-autocomplete #autoVinho="matAutocomplete" [displayWith]="displayVinho">
+                    <mat-option *ngFor="let wine of filteredDevelopers | async" [value]="wine"
+                        (click)="applyFilter($event.target.innerText)">
+                        {{ wine.type }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <mat-label>Gênero</mat-label>
-            <input type="text" placeholder="Ex. Ação" matInput [formControl]="genresControl"
-                [matAutocomplete]="autoGenre" (input)="applyFilter($event.target.value)"
-                (keyup.enter)="applyFilter($event.target.value)">
-            <mat-autocomplete #autoGenre="matAutocomplete" [displayWith]="displayGenres">
-                <mat-option *ngFor="let wine of filteredGenres | async" [value]="wine"
-                    (click)="applyFilter($event.target.innerText)">
-                    {{ wine.genre }}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Tipo da uva</mat-label>
+                <input type="text" placeholder="Ex. Ação" matInput [formControl]="tipoUva" [matAutocomplete]="autoUva"
+                    (input)="applyFilter($event.target.value)" (keyup.enter)="applyFilter($event.target.value)">
+                <mat-autocomplete #autoUva="matAutocomplete" [displayWith]="displayUva">
+                    <mat-option *ngFor="let wine of filteredGenres | async" [value]="wine"
+                        (click)="applyFilter($event.target.innerText)">
+                        {{ wine.type_grape }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
 
-    </form>
-</mat-card>
+            <mat-form-field class="example-full-width">
+                <mat-label>Harmonização</mat-label>
+                <input type="text" matInput [formControl]="tipoHarmonizacao" [matAutocomplete]="autoHarmonizacao"
+                    (input)="applyFilter($event.target.value)" (keyup.enter)="applyFilter($event.target.value)">
+                <mat-autocomplete #autoHarmonizacao="matAutocomplete" [displayWith]="displayHarmonizacao">
+                    <mat-option *ngFor="let wine of filteredHarmo | async" [value]="wine"
+                        (click)="applyFilter($event.target.innerText)">
+                        {{ wine.harmonizing }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
 
-<div class="flex-container">
-    <div *ngFor="let wine of wines; let i = index;" class="item-card">
-        <mat-card class="flex-item card-container mat-elevation-z8">
+        </form>
+    </mat-card>
 
-            <mat-card-header (click)="abrirModalDetalhes(wine)">
-                <mat-card-title>{{ wine.name }}</mat-card-title>
-            </mat-card-header>
+    <div class="flex-container">
+        <div *ngFor="let wine of wines; let i = index;" class="item-card">
+            <mat-card class="flex-item card-container mat-elevation-z8">
 
-            <!-- <mat-card-content class="card-content cursor-pointer" (click)="abrirModalDetalhes(wine)">
-                <div *ngIf="wine.imagens.length === 0; else elseImagens">
-                    <img class="card-image" src="../../../assets/img/dump3.png" alt="Dump">
-                </div>
-                <ng-template #elseImagens>
-                    <div *ngFor="let image of wine.imagens">
-                        <img *ngIf="image.destaque" class="card-image" [src]="transformImageUrl(image.url)"
-                            onerror="this.src='../../../assets/img/dump3.png'" alt="Photo: {{wine.id}}">
-                    </div>
-                </ng-template>
-                <span class="preco-avista">{{ wine.preco_avista | currency }} à vista</span>
-                <span class="preco-parcelado">{{ wine.preco_parcelado | currency }} parcelado</span>
+                <mat-card-header (click)="navegarReview(wine)">
+                    <mat-card-title>{{ wine.name }}</mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content (click)="navegarReview(wine)">
+                    <img style="object-fit: cover;" [src]="transformImageUrl(wine?.image_url)" width="200px"
+                        height="200px" onerror="this.src='../../../../assets/img/dump3.png'" [alt]="wine?.name">
+                </mat-card-content>
+
                 <hr>
-            </mat-card-content>
+                <span class="preco-avista">{{ 10 | currency }} à vista</span> <br>
+                <span class="preco-parcelado">{{ 100 | currency }} parcelado</span>
 
-            <mat-card-actions class="card-actions">
-                <mat-slide-toggle class="col-md-3" #tooltip="matTooltip" matTooltip="Ativar / Desativar"
-                    matTooltipPosition="above" (change)="ativarDesativar(wine)" (click)="$event.stopPropagation()"
-                    [(ngModel)]="wine.ativo">
-                </mat-slide-toggle>
-                <div class="offset-md-4 col-md-5" style="text-align: end;">
-                    <a class="cursor-pointer edit" (click)="dialogEditar(wine)">
-                        <i class="material-icons" #tooltip="matTooltip" matTooltip="Editar exibição"
-                            matTooltipPosition="above">
-                            edit
-                        </i>
-                    </a>
-                    <a class="cursor-pointer delete" (click)="dialogExcluir(wine)">
-                        <i class="material-icons" #tooltip="matTooltip" matTooltip="Excluir exibição"
-                            matTooltipPosition="above">
-                            delete
-                        </i>
-                    </a>
-                </div>
-            </mat-card-actions> -->
+                <mat-card-actions *ngIf="isLogged">
+                    <div style="padding-bottom: 15px;">
+                        <a class="cursor-pointer edit" routerLink="/wines/update/{{ wine.id }}">
+                            <i class="material-icons">
+                                edit
+                            </i>
+                        </a>
+                        <a class="cursor-pointer delete" routerLink="/wines/delete/{{ wine.id }}">
+                            <i class="material-icons">
+                                delete
+                            </i>
+                        </a>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
 
+    <div *ngIf="wines.length == 0">
+        <mat-card>
+            Ainda não há vinhos cadastrados! Para contribuir você precisa estar logado
         </mat-card>
     </div>
-</div>
-
-<div *ngIf="wines.length == 0">
-    <mat-card>
-        Ainda não há vinhos cadastrados! Para contribuir você precisa estar logado
-    </mat-card>
-</div>
+</ng-template>

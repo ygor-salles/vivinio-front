@@ -1,6 +1,6 @@
 <mat-card class="container-login">
     <mat-card-title class="titulo">
-        <img class="kratos-mini" src="../../../assets/img/kratos-mini.png" alt="kratos">
+        <img class="vinho-mini" src="../../../assets/img/vinho-icon.png" alt="vinho">
     </mat-card-title>
     <form>
         <mat-form-field>
@@ -8,8 +8,8 @@
         </mat-form-field>
         <mat-form-field>
             <mat-label>Senha</mat-label>
-            <input [(ngModel)]="usuario.password" type="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Senha" name="password"
-                id="password">
+            <input [(ngModel)]="usuario.password" type="password" matInput [type]="hide ? 'password' : 'text'"
+                placeholder="Senha" name="password" id="password">
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

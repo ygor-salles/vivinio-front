@@ -32,7 +32,7 @@
     </form>
 
     <div align="end">
-        <button mat-raised-button (click)="createWine()" color="primary">
+        <button mat-raised-button (click)="createWine()" [disabled]="!validaForm()" color="primary">
             Salvar
         </button>
 

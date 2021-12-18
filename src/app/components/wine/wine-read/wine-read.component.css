@@ -3,6 +3,23 @@ form {
     flex-direction: row;
 }
 
+.item-card:hover {
+    transform: scale(1.02);
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+::ng-deep .mat-card-header-text {
+    margin: 18px 0 0 0 !important;
+}
+
+.card-container {
+    border-radius: 10px;
+    position: relative;
+}
+
 .flex-container {
     display: flex;
     flex-direction: row;
@@ -37,11 +54,15 @@ table {
 }
 
 .edit {
-    margin-right: 10px;
+    margin-right: 50%;
+}
+
+.delete {
+    margin-right: 60%;
 }
 
 .edit>i {
-    color: #06d6a0;
+    color: #d9cd26;
 }
 
 .delete {
@@ -63,4 +84,20 @@ table {
 
 .not-found {
     text-align: center;
+}
+
+.preco-avista {
+    font-size: large;
+    color: #0000008a;
+    padding-bottom: 3px;
+}
+
+.preco-parcelado {
+    font-size: small;
+    color: #0000008a;
+    padding-bottom: 3px;
+}
+
+hr {
+    width: 100%;
 }
