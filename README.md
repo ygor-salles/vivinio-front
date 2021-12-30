@@ -1,27 +1,40 @@
-# Frontend
+<h1 align="center">
+    <img alt="vivinio" title="" src="./assets/vivinio-logo.PNG" width="250px" />
+</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.7.
+<h4 align="center">
+    :computer: Teste prático de programação
+</h4>
 
-## Development server
+<p align="center">
+    <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="#user-content-clipboard-instruções">Instruções</a></p>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<img alt="Interface" src="./assets/Capturar.PNG" width="100%" align="center">
+<br/>
 
-## Code scaffolding
+## 💻 Projeto
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Frontend App em Angular. Aplicação frontend para cadastramento de vinhos, autenticação de usuário e comentários sobre os vinhos
 
-## Build
+<br>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## :rocket: Tecnologias
 
-## Running unit tests
+- [Angular](https://angular.io/) 
+- [Material](https://material.angular.io/)
+- [Typescript](https://www.typescriptlang.org/)
+- [HTML5](https://developer.mozilla.org/pt-BR/docs/Web/Guide/HTML/HTML5)
+- [CSS3](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
+- [SCSS/SASS](https://sass-lang.com/)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## :clipboard: Instruções
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+----
+### INTERFACE - FRONTEND
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Execute `$ yarn` para instalar todas as dependencias.
+- Caso tenha alterado o endereço da API backend, navegue até  `vivinio-front\src\environments` a abra o arquivo  `environment.ts`. Em  `apiUrl: 'http://localhost:4000';`, coloque o novo endereço. 
+- Após todas as dependencias serem instaladas, Pronto! Basta executar  `yarn start` para iniciar a interface frontend.
