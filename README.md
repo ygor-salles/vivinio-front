@@ -3,7 +3,7 @@
 </h1>
 
 <h4 align="center">
-    :computer: Teste prático de programação
+    :computer: Aplicação para cadastramento de vinhos
 </h4>
 
 <p align="center">
